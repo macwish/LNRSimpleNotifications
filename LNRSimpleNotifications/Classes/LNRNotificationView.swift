@@ -153,6 +153,7 @@ public class LNRNotificationView: UIView, UIGestureRecognizerDelegate {
     
     func notificationViewHeightAfterLayoutOutSubviews(padding: CGFloat, notificationWidth: CGFloat) -> CGFloat {
         
+        let iconMargin = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 10)
         var height: CGFloat = 0.0
         
         var textLabelsXPosition: CGFloat = 2.0 * padding
@@ -160,7 +161,8 @@ public class LNRNotificationView: UIView, UIGestureRecognizerDelegate {
         let topPadding = self.position == LNRNotificationPosition.Top && statusBarVisible ? kStatusBarHeight + padding : padding
         
         if let image = self.iconImageView.image {
-            textLabelsXPosition += image.size.width
+            self.iconImageView.frame.origin.x += iconMargin.left
+            textLabelsXPosition += image.size.width + iconMargin.right
         }
         
         self.titleLabel.frame = CGRect(x: textLabelsXPosition, y: topPadding, width: notificationWidth - textLabelsXPosition - padding, height: CGFloat(0.0))
